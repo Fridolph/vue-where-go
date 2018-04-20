@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mvvm</title>
+</head>
+<body>
+  <!-- V层 -->
+  <div id="app">
+    <input v-model="text" id="input">
+    <button @click="add">add</button>
+    <ul id="list">
+      <li v-for="item in list">{{item}}</li>
+    </ul>
+  </div>  
+
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+  <script>
+    // M层
+    // M层数据变化 -> V层 变化， 这层是VM层，由Vue为我们封装好了
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        text: '',
+        list: ['to to']
+      },
+      methods: {
+        add() {
+          this.list.push(this.text)
+          this.text = ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>

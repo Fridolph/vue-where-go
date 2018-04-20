@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 多个元素的过渡动画</title>
+  <style>
+    .fade-enter {
+      opacity: 0;
+      /* transform: translateX(-30px); */
+    }
+    .fade-enter-active {      
+      transition: all 1s;
+    }
+    .fade-leave-to {
+      opacity: 0;
+      /* transform: translateX(30px); */
+    }
+    .fade-leave-active {
+      transition: all 1s;
+    }
+  </style>
+</head>
+<body>
+  <!-- V层 -->
+  <div id="root">
+    <h3>Vue CSS3过渡动画</h3>
+    <button @click="handleClick">切换</button>
+    <transition mode="out-in" name="fade">
+      <!-- <child1 v-if="show" key="1">hello world</child1>
+      <child2 v-else key="2">learn vue</child2> -->
+      <component :is="show ? 'child1' : 'child2'" />
+    </transition>
+  </div>  
+
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+  <script>    
+    Vue.component('child1', {
+      template: `<div>child - one</div>`
+    })
+    Vue.component('child2', {
+      template: `<div>child - two</div>`
+    })
+
+    let vm = new Vue({
+      el: '#root',
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick() {
+          this.show = !this.show
+        }
+      }
+    })
+  </script>
+</body>
+</html>

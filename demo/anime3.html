@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue JS动画</title>
+  <link rel="stylesheet" href="./animate.css">
+</head>
+<body>
+  <!-- V层 -->
+  <div id="root">
+    <h3>Vue JS动画</h3>
+    <button @click="handleClick">切换</button>
+    <!-- before-enter钩子执行完后就执行enter钩子 -->
+    <transition 
+      name="fade" 
+      @before-enter="handleBeforeEnter"
+      @enter="handleEnter"
+      @after-enter="handleAfterEnter"
+    >
+      <div v-show="show">hello world</div>
+    </transition>
+  </div>  
+
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+  <script>    
+    let vm = new Vue({
+      el: '#root',
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick() {
+          this.show = !this.show
+        },
+        handleBeforeEnter(el) {
+          // console.log('handleBeforeEnter')
+          el.style.color = 'red'
+        },
+        handleEnter(el, done) {
+          setTimeout(() => {
+            el.style.color = 'green'            
+            // 只有done调用后才会进入下一钩子（类比 express里的next方法）
+          }, 1000)
+          setTimeout(() => {
+            el.style.color = '#000'
+            done()
+          }, 2000)
+        },
+        handleAfterEnter(el) {
+          el.style.color = '#000'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

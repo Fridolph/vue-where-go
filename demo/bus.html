@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>非父子组件间传值</title>
+</head>
+<body>
+  <!-- V层 -->
+  <div id="root">
+    <h3>Bus总线/发布订阅模式/观察者模式</h3>
+    <child content="fridolph"></child>
+    <child content="yangke"></child>
+  </div>  
+
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+  <script>
+    Vue.prototype.bus = new Vue()
+
+    Vue.component('child', {      
+      props: {
+        content: {
+          type: String
+        }
+      },
+      data() {
+        return {
+          selfContent: this.content
+        }
+      },
+      template: `<p @click="handleClick">{{selfContent}}</p>`,
+      methods: {
+        handleClick() {
+          this.bus.$emit('change', this.selfContent)
+        }
+      },
+      mounted() {
+        this.bus.$on('change', msg => {
+          this.selfContent = msg
+        })
+      }
+    })
+    
+    let vm = new Vue({
+      el: '#root'
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue JS动画 Velocity.js</title>
+  <link rel="stylesheet" href="./animate.css">
+</head>
+<body>
+  <!-- V层 -->
+  <div id="root">
+    <h3>Vue Velocity.js</h3>
+    <button @click="handleClick">切换</button>
+    <!-- before-enter钩子执行完后就执行enter钩子 -->
+    <transition 
+      name="fade" 
+      @before-enter="handleBeforeEnter"
+      @enter="handleEnter"
+      @after-enter="handleAfterEnter"
+    >
+      <div v-show="show">hello world</div>
+    </transition>
+  </div>  
+
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/velocity/2.0.2/velocity.min.js"></script>
+  <script>    
+    let vm = new Vue({
+      el: '#root',
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick() {
+          this.show = !this.show
+        },
+        handleBeforeEnter(el) {
+          el.style.opacity = 0.3
+        },
+        handleEnter(el, done) {
+          Velocity(
+            el, 
+            {
+              opacity: 1 
+            },
+            {
+              duration: 1000,
+              complete: done
+            }
+          )
+        },
+        handleAfterEnter(el) {
+          alert('动画结束')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

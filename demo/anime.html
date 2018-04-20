@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue CSS3 transition动画</title>
+  <style>
+    .fade-enter {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    .fade-enter-active {      
+      transition: all 1s;
+    }
+    .fade-leave-to {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    .fade-leave-active {
+      transition: all 1s;
+    }
+  </style>
+</head>
+<body>
+  <!-- V层 -->
+  <div id="root">
+    <h3>Vue CSS3过渡动画</h3>
+    <button @click="handleClick">切换</button>
+    <transition name="fade">
+      <div v-show="show">hello world</div>
+    </transition>
+  </div>  
+
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+  <script>    
+    let vm = new Vue({
+      el: '#root',
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick() {
+          this.show = !this.show
+        }
+      }
+    })
+  </script>
+</body>
+</html>
