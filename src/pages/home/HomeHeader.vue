@@ -1,0 +1,54 @@
+<template>
+  <section class="home-header">
+    <div class="header-left">
+      <i class="iconfont">&#xe624;</i>
+    </div>
+    <div class="header-input"><i class="iconfont">&#xe632;</i> 输入城市/游玩/精选/主题</div>
+    <div class="header-right">
+      <span>城市</span>
+      <i class="iconfont">&#xe65e;</i>
+    </div>
+  </section>
+</template>
+
+<style lang="stylus" scoped>
+@import '~@/assets/css/varibles.styl'
+
+.home-header
+  height 128px
+  display flex
+  background $bgColor
+  .header-left
+    float left
+    width 100px
+    line-height 128px
+    i
+      display block
+      font-size 48px
+      color #efefef
+      font-weight bold
+      text-align center
+  .header-input
+    flex 1
+    background #fff
+    margin: 24px 20px 0
+    height 80px
+    border-radius 12px
+    color #ccc
+    line-height 80px
+    padding 0 32px
+    i
+      font-size 48px
+  .header-right
+    float right
+    width 180px
+    text-align center
+    line-height 128px
+    text-align center
+    color #efefef
+    i
+      font-size 36px
+      display inline-block
+      transform translateY(-6px)
+
+</style>
