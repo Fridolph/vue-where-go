@@ -1,0 +1,78 @@
+<template>
+  <section class="wrapper">
+    <swiper :options="swiperOption" ref="homeSwiper">
+      <!-- slides -->
+      <swiper-slide v-for="item in items" :key="item.img">
+        <img class="swiper-img" :src="item.img" alt="轮播图">
+      </swiper-slide>
+      <!-- Optional controls -->
+      <div class="swiper-pagination" slot="pagination"></div>
+      <!-- <div class="swiper-button-prev" slot="button-prev"></div> -->
+      <!-- <div class="swiper-button-next" slot="button-next"></div> -->
+      <!-- <div class="swiper-scrollbar"   slot="scrollbar"></div> -->
+    </swiper>
+  </section>
+</template>
+
+<script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
+export default {
+  components: {
+    swiper,
+    swiperSlide
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true,
+      default() {
+        return []
+      }
+    }
+  },
+  data() {
+    return {
+      swiperOption: {
+        autoplay: 3000,
+        setWrapperSize: true,
+        autoHeight: true,
+        loop: true,
+        pagination: '.swiper-pagination'
+      }
+    }
+  },
+  computed: {
+    investorInfo() {
+      return this.$store.state.InvestorInfo
+    }
+  },
+  mounted() {
+    // this.swiper.slideTo(3, 1000, false)
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+.wrapper >>> .swiper-pagination-bullet-active
+  background rgba(255,255,255,0.7)
+.wrapper >>> .swiper-pagination-bullet
+  width 26px
+  height 26px
+  margin: 8px 10px
+.wrapper
+  overflow hidden
+  width 100%
+  height 0
+  padding-bottom 31%
+  background #eee
+  .swiper-slide
+    .swiper-img
+      width 100%
+
+</style>
+
+<style>
+
+</style>

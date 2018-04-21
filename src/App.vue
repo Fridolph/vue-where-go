@@ -10,11 +10,11 @@ export default {
 }
 </script>
 
-<style>
-#app {
+<style lang="stylus">
+#app
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 48px;
-}
+  min-height: 100vh;
 </style>

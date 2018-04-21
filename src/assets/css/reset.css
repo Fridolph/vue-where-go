@@ -1,1 +1,4 @@
 * {padding: 0;margin: 0;box-sizing: border-box;}
+ol,ul,li {list-style: none;}
+html {color: #444;}
+a {text-decoration: none; color: #666;}
