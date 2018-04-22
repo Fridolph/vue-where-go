@@ -8,6 +8,8 @@
     <home-recommend :items="recommendItems"></home-recommend>
     <split />
     <home-like :items="likeItems"></home-like>
+    <split />
+    <home-weekly></home-weekly>
   </div>
 </template>
 
@@ -18,6 +20,7 @@ import HomeMenu from './HomeMenu'
 import HomeRecommend from './HomeRecommend'
 import Split from '../../components/split'
 import HomeLike from './HomeLike'
+import HomeWeekly from './HomeWeekly'
 
 export default {
   components: {
@@ -26,7 +29,8 @@ export default {
     HomeMenu,
     Split,
     HomeRecommend,
-    HomeLike
+    HomeLike,
+    HomeWeekly
   },
   data() {
     return {
@@ -132,7 +136,7 @@ export default {
           today: true,
           img: 'http://img1.qunarzz.com/sight/p0/1712/5d/5d4f18e64813d0f6a3.img.jpg_200x200_2a260ea1.jpg',
           title: '成都欢乐谷',
-          star: 4,
+          star: '★★★★★',
           commentNum: '2121',
           price: '67',
           addr: '金牛区'
@@ -141,7 +145,7 @@ export default {
           today: true,
           img: 'http://img1.qunarzz.com/sight/p0/1704/a5/a59677101e07d38a3.img.jpg_200x200_6064e939.jpg',
           title: '国色天乡·陆地乐园',
-          star: 5,
+          star: '★★★★★',
           commentNum: '2121',
           price: '28',
           addr: '国色天香'
@@ -150,20 +154,76 @@ export default {
           today: true,
           img: 'http://img1.qunarzz.com/sight/p0/201309/24/977fea7b3c5cd758c8d65eac.jpg_200x200_697c3b3f.jpg',
           title: '成都熊猫基地',
-          star: 4,
+          star: '★★★★★',
           commentNum: '666666',
           price: '54',
           addr: '成华区',
-          popular: true
+          popular: '🔥好评如潮，小伙伴热推景点~'
         },
         {
           today: true,
           img: 'http://img1.qunarzz.com/sight/p0/1612/1d/1d9a740c1f9e0efaa3.img.jpg_200x200_63285bd9.jpg',
           title: '成都海昌极地海洋公园',
-          star: 4,
+          star: '★★★★★',
           commentNum: '8888',
           price: '75',
           addr: '天府新区'
+        },
+        {
+          today: true,
+          img: 'http://img1.qunarzz.com/sight/p0/1804/5d/5dab68ebb296bbd5a3.img.png_200x200_1181e5bc.png',
+          title: '漫花庄园',
+          star: '★★★★★',
+          commentNum: '2333',
+          price: '40',
+          addr: '新都区'
+        },
+        {
+          today: true,
+          img: 'http://img1.qunarzz.com/sight/p0/1706/c4/c4b6c51a2ac942cfa3.img.jpg_200x200_2805e881.jpg',
+          title: '花舞人间',
+          star: '★★★★★',
+          commentNum: '2453',
+          price: '55',
+          addr: '新津县',
+          popular: '体验如天堂般绚丽多姿的花海'
+        },
+        {
+          today: true,
+          img: 'http://img1.qunarzz.com/sight/p0/1505/b0/b0132e78efa00572.water.jpg_200x200_3f499a59.jpg',
+          title: '青城山',
+          star: '★★★★★',
+          commentNum: '12453',
+          price: '88',
+          addr: '都江堰市'
+        },
+        {
+          today: true,
+          img: 'http://img1.qunarzz.com/sight/p0/1505/b0/b0132e78efa00572.water.jpg_200x200_3f499a59.jpg',
+          title: '青城山',
+          star: '★★★★★',
+          commentNum: '12453',
+          price: '88',
+          addr: '都江堰市'
+        },
+        {
+          today: true,
+          img: 'http://img1.qunarzz.com/sight/p0/201407/03/a584374ee80b738e2600d6bcaf1299e3.jpg_200x200_c26fb243.jpg',
+          title: '都江堰',
+          star: '★★★★★',
+          commentNum: '12453',
+          price: '88',
+          addr: '都江堰市',
+          popular: '成都本月收藏Top5╰(￣▽￣)╭'
+        },
+        {
+          today: true,
+          img: 'http://img1.qunarzz.com/sight/p0/1803/55/552d507bd2ea97fea3.img.jpg_200x200_144a57b8.jpg',
+          title: '石象湖',
+          star: '★★★★★',
+          commentNum: '2812',
+          price: '40',
+          addr: '蒲江县'
         }
       ]
     }

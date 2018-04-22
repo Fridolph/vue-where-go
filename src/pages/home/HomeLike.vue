@@ -26,16 +26,24 @@
         <div class="info">
           <h3 class="title">{{item.title}}</h3>
           <div class="comment">
-            <div class="star-level">{{item.star}}</div>
+            <div class="star-level">
+              ★★★★★
+            </div>
             <div class="comment-num">{{item.commentNum}}条评论</div>
           </div>
           <div class="price">
             <span class="m-price">￥<em>{{item.price}}</em></span>起
             <span class="addr">{{item.addr}}</span>
           </div>
+          <div class="popular" v-if="item.popular">
+            {{item.popular}}
+          </div>
         </div>
       </li>
     </ul>
+    <div class="list-more-wrapper">
+      <a href="javascript:;">查看更多产品</a>
+    </div>
   </section>
 </template>
 
@@ -54,6 +62,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~@css/base.styl';
+
 .like-title
   position relative
   padding 0.25rem
@@ -77,8 +87,66 @@ export default {
       padding-top 0
     padding 0.5rem 0
     border-bottom 1px solid #dddddd
-    background pink
+    &:last-child
+      border-bottom 0
     display flex
     .img-wrapper
-      margin-top 0.5rem
+      margin 0.5rem 0.5rem 0 0
+    .info
+      margin-top 0.4rem
+      flex 1
+      position relative
+      .title
+        font-weight normal
+        font-size 48px
+      .comment
+        margin-top 0.2rem
+        .star-level, .comment-num
+          display inline-block
+          vertical-align top
+          line-height 60px
+        .star-level
+          color #ffb436
+          width 240px
+          .iconfont
+            font-size 40px
+        .comment-num
+          display inline-block
+          margin-left 0.5rem
+          font-size 40px
+      .price
+        margin-top 0.3rem
+        font-size 40px
+        width 100%
+        display block
+        position relative
+        .m-price
+          color orange
+          font-weight bold
+          em
+            font-style normal
+            margin-left -0.1rem
+            font-size 66px
+        .addr
+          position absolute
+          right 0.5rem
+          top 0.2rem
+          font-size 40px
+      .popular
+        background-color #fff9f9
+        color #f55
+        position absolute
+        bottom 0
+        left 0
+        padding 8px 16px
+        border-radius 8px
+        font-size 36px
+        ellipsis()
+.list-more-wrapper
+  padding 0.5rem 0
+  border-top 1px solid #dedede
+  text-align center
+  a
+    color #00afc7
+    display block
 </style>
