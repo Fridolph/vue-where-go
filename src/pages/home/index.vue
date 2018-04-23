@@ -46,23 +46,19 @@ export default {
     }
   },
   methods: {
-    getHomeData() {
-      request.get('/homeData.json')
-        .then(res => {
-          console.log('拿到了数据\n', res)
-          if (res.data.code !== 0) return new Error('获取数据错误')
-          let { data } = res.data
-          this.city = data.city
-          this.swiperItems = data.swiperItems
-          this.menuItems = data.menuItems
-          this.recommendItems = data.recommendItems
-          this.likeItems = data.likeItems
-          this.weeklyItems = data.weeklyItems
-        })
+    async _initData() {
+      let {data} = await request.get('/homeData.json')
+      if (data.code !== 0) return new Error(data.msg)
+      this.city = data.data.city
+      this.swiperItems = data.data.swiperItems
+      this.menuItems = data.data.menuItems
+      this.recommendItems = data.data.recommendItems
+      this.likeItems = data.data.likeItems
+      this.weeklyItems = data.data.weeklyItems
     }
   },
   created() {
-    this.getHomeData()
+    this._initData()
   }
 }
 </script>

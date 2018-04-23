@@ -4,10 +4,12 @@
       <i class="iconfont">&#xe624;</i>
     </div>
     <div class="header-input"><i class="iconfont">&#xe632;</i> 输入城市/游玩/精选/主题</div>
-    <div class="header-right">
-      <span>{{city}}</span>
-      <i class="iconfont">&#xe65e;</i>
-    </div>
+    <router-link to="/city">
+      <div class="header-right">
+        <span>{{city}}</span>
+        <i class="iconfont">&#xe65e;</i>
+      </div>
+    </router-link>
   </section>
 </template>
 
@@ -26,13 +28,13 @@ export default {
 @import '~@/assets/css/varibles.styl'
 
 .home-header
-  height 128px
+  height $headerHeight
   display flex
   background $bgColor
   .header-left
     float left
     width 100px
-    line-height 128px
+    line-height $headerHeight
     i
       display block
       font-size 48px
@@ -54,7 +56,7 @@ export default {
     float right
     width 180px
     text-align center
-    line-height 128px
+    line-height $headerHeight
     text-align center
     color #efefef
     i
