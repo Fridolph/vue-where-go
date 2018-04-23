@@ -47,14 +47,18 @@ export default {
   },
   methods: {
     async _initData() {
-      let {data} = await request.get('/homeData.json')
-      if (data.code !== 0) return new Error(data.msg)
-      this.city = data.data.city
-      this.swiperItems = data.data.swiperItems
-      this.menuItems = data.data.menuItems
-      this.recommendItems = data.data.recommendItems
-      this.likeItems = data.data.likeItems
-      this.weeklyItems = data.data.weeklyItems
+      try {
+        let {data} = await request.get('/homeData.json')
+        if (data.code !== 0) return data.msg
+        this.city = data.data.city
+        this.swiperItems = data.data.swiperItems
+        this.menuItems = data.data.menuItems
+        this.recommendItems = data.data.recommendItems
+        this.likeItems = data.data.likeItems
+        this.weeklyItems = data.data.weeklyItems
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   created() {

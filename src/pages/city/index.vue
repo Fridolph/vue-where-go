@@ -1,7 +1,7 @@
 <template>
   <section class="page-city">
     <city-header></city-header>
-    <city-list></city-list>
+    <city-list :hotCity="hotCity" :letterList="letterList"></city-list>
   </section>
 </template>
 
@@ -17,14 +17,21 @@ export default {
   },
   data() {
     return {
-      hotCity: []
+      hotCity: {},
+      letterList: []
     }
   },
   methods: {
     async _initData() {
-      let {data} = await request.get('/cityData.json')
-      console.log(data)
-      this.hotCity = data.data.hotCity
+      try {
+        let {data} = await request.get('/cityData.json')
+        if (data.code !== 0) return data.msg
+        // console.table(data.data)
+        this.hotCity = data.data.hotCity
+        this.letterList = data.data.letterList
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   mounted() {
