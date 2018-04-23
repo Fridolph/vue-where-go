@@ -136,7 +136,7 @@ export default {
         background-color #fff9f9
         color #f55
         position absolute
-        bottom 0
+        bottom 10px
         left 0
         padding 8px 16px
         border-radius 8px

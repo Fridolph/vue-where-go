@@ -42,7 +42,8 @@ module.exports = {
       '@layouts': resolve('src/layouts'),
       '@pages': resolve('src/pages'),
       '@router': resolve('src/router'),
-      '@store': resolve('src/store')
+      '@store': resolve('src/store'),
+      '@lib': resolve('src/lib')
     }
   },
   module: {

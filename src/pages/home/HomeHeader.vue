@@ -5,11 +5,22 @@
     </div>
     <div class="header-input"><i class="iconfont">&#xe632;</i> 输入城市/游玩/精选/主题</div>
     <div class="header-right">
-      <span>城市</span>
+      <span>{{city}}</span>
       <i class="iconfont">&#xe65e;</i>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  props: {
+    city: {
+      type: String,
+      default: '城市'
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 @import '~@/assets/css/varibles.styl'

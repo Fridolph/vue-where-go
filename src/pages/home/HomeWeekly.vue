@@ -16,16 +16,30 @@
       </li> -->
       <li class="list-item" v-for="item in items" :key="item.title">
         <figure class="img-wrapper">
-          <img src="" alt="img">
+          <img :src="item.img" :alt="item.title">
         </figure>
         <div class="content">
-          <h3>成都必游TOP10</h3>
-          <p>成都的标志，也是现代人对老成都的记忆</p>
+          <h3>{{item.title}}</h3>
+          <p>{{item.desc}}</p>
         </div>
       </li>
     </ul>
   </section>
 </template>
+
+<script>
+export default {
+  props: {
+    items: {
+      type: Array,
+      required: true,
+      default() {
+        return []
+      }
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 @import '~@css/base.styl';

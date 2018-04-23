@@ -133,9 +133,10 @@ export default {
       font-size 36px
       span
         color orange
+        font-size 36px
         font-weight bold
-        font-size 44px
         em
           font-style normal
-          margin-left -8px
+          margin 0 4px 0 -8px
+          font-size 46px
 </style>

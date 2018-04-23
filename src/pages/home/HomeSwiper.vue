@@ -1,6 +1,6 @@
 <template>
   <section class="wrapper">
-    <swiper :options="swiperOption" ref="homeSwiper">
+    <swiper :options="swiperOption" ref="homeSwiper" v-if="showSwiper">
       <!-- slides -->
       <swiper-slide v-for="item in items" :key="item.img">
         <img class="swiper-img" :src="item.img" alt="轮播图">
@@ -44,8 +44,8 @@ export default {
     }
   },
   computed: {
-    investorInfo() {
-      return this.$store.state.InvestorInfo
+    showSwiper() {
+      return this.items.length
     }
   },
   mounted() {
