@@ -24,7 +24,7 @@ export default {
   methods: {
     async _initData() {
       try {
-        let {data} = await request.get('/cityData.json')
+        let {data} = await request.get('/citylist')
         if (data.code !== 0) return data.msg
         // console.table(data.data)
         this.hotCity = data.data.hotCity

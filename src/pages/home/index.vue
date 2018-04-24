@@ -48,7 +48,7 @@ export default {
   methods: {
     async _initData() {
       try {
-        let {data} = await request.get('/homeData.json')
+        let {data} = await request.get('/city/chengdu')
         if (data.code !== 0) return data.msg
         this.city = data.data.city
         this.swiperItems = data.data.swiperItems
