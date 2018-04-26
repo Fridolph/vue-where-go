@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import request from '@lib/request'
+import request from '@utils/request'
 import CityHeader from './CityHeader'
 import CityList from './CityList'
 

@@ -5,7 +5,7 @@ let cancel = null
 let promiseArr = {}
 const CancelToken = axios.CancelToken
 
-axios.defaults.baseURL = ' http://mock.fridolph.wang/mock/5adf417db6bbcd7473ff1e3e/qunar/api'
+axios.defaults.baseURL = ' http://mock.fridolph.wang/mock/5adf417db6bbcd7473ff1e3e/qunar'
 axios.defaults.headers = {
   'X-Requested-With': 'XMLHttpRequest'
 }

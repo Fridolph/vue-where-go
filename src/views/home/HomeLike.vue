@@ -47,17 +47,13 @@
   </section>
 </template>
 
-<script>
-export default {
-  props: {
-    items: {
-      type: Array,
-      required: true,
-      default() {
-        return []
-      }
-    }
-  }
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator'
+
+@Component
+export default class HomeLike extends Vue {
+  @Prop({required: true, default: []})
+  items: any[]
 }
 </script>
 

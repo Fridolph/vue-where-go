@@ -13,14 +13,13 @@
   </section>
 </template>
 
-<script>
-export default {
-  props: {
-    city: {
-      type: String,
-      default: '城市'
-    }
-  }
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator'
+
+@Component
+export default class HomeHeader extends Vue {
+  @Prop({default: '城市'})
+  city: string
 }
 </script>
 

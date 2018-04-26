@@ -13,18 +13,19 @@
   </div>
 </template>
 
-<script>
-import request from '@lib/request'
-import HomeHeader from './HomeHeader'
-import HomeSwiper from './HomeSwiper'
-import HomeMenu from './HomeMenu'
-import HomeRecommend from './HomeRecommend'
-import Split from '../../components/split'
-import HomeLike from './HomeLike'
-import HomeWeekly from './HomeWeekly'
-import LayoutFooter from '@layouts/LFooter'
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
+import request from '@utils/request'
+import HomeHeader from './HomeHeader.vue'
+import HomeSwiper from './HomeSwiper.vue'
+import HomeMenu from './HomeMenu.vue'
+import HomeRecommend from './HomeRecommend.vue'
+import Split from '../../components/split.vue'
+import HomeLike from './HomeLike.vue'
+import HomeWeekly from './HomeWeekly.vue'
+import LayoutFooter from '@layouts/LFooter.vue'
 
-export default {
+@Component({
   components: {
     HomeHeader,
     HomeSwiper,
@@ -34,35 +35,33 @@ export default {
     HomeLike,
     HomeWeekly,
     LayoutFooter
-  },
-  data() {
-    return {
-      city: '',
-      swiperItems: [],
-      menuItems: [],
-      recommendItems: [],
-      likeItems: [],
-      weeklyItems: []
-    }
-  },
-  methods: {
-    async _initData() {
-      try {
-        let {data} = await request.get('/city/chengdu')
-        if (data.code !== 0) return data.msg
-        this.city = data.data.city
-        this.swiperItems = data.data.swiperItems
-        this.menuItems = data.data.menuItems
-        this.recommendItems = data.data.recommendItems
-        this.likeItems = data.data.likeItems
-        this.weeklyItems = data.data.weeklyItems
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  },
+  }
+})
+export default class Home extends Vue {
+  city: string = ''
+  swiperItems: any[] = []
+  menuItems: any[] = []
+  recommendItems: any[] = []
+  likeItems: any[] = []
+  weeklyItems: any[] = []
+
   created() {
     this._initData()
+  }
+
+  async _initData() {
+    try {
+      let {data} = await request.get('/city/chengdu')
+      if (data.code !== 0) return data.msg
+      this.city = data.data.city
+      this.swiperItems = data.data.swiperItems
+      this.menuItems = data.data.menuItems
+      this.recommendItems = data.data.recommendItems
+      this.likeItems = data.data.likeItems
+      this.weeklyItems = data.data.weeklyItems
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 </script>

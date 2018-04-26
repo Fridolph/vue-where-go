@@ -30,7 +30,7 @@ module.exports = {
       '@js': resolve('src/assets/js'),
       '@css': resolve('src/assets/css'),
       '@lib': resolve('src/assets/lib'),
-      '@utils': resolve('src/assets/utils'),
+      '@utils': resolve('src/utils'),
       '@mixin': resolve('src/mixin'),
       '@store': resolve('src/store'),
       '@views': resolve('src/views'),
