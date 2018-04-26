@@ -84,8 +84,8 @@ export default {
     .item
       flex 0 0 33.33%
       padding 0.5rem
-      border-right 3px solid #dedede
-      border-bottom 3px solid #dedede
+      border-right 2px solid #dedede
+      border-bottom 2px solid #dedede
       text-align center
       font-size 45px
       ellipsis()
@@ -104,4 +104,17 @@ export default {
       line-height 120px
       text-align center
       font-size 44px
+  .letter-box
+    display flex
+    align-items center
+    flex-wrap wrap
+    .item
+      flex 0 0 25%
+      height 120px
+      line-height 120px
+      border-right 2px solid #dedede
+      border-bottom 2px solid #dedede
+      text-align center
+      font-size 45px
+      ellipsis()
 </style>
