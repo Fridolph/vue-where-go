@@ -3,26 +3,18 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
-  loader: 'eslint-loader',
-  enforce: 'pre',
-  include: [resolve('src'), resolve('test')],
-  options: {
-    formatter: require('eslint-friendly-formatter'),
-    emitWarning: !config.dev.showEslintErrorsInOverlay
-  }
-})
-
 module.exports = {
-  context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.ts',
+    vendor: [
+      "lodash"
+    ]
   },
   output: {
     path: config.build.assetsRoot,
@@ -32,32 +24,60 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.ts', '.tsx'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      '@css': resolve('src/assets/css'),
       '@js': resolve('src/assets/js'),
-      '@components': resolve('src/components'),
-      '@layouts': resolve('src/layouts'),
-      '@pages': resolve('src/pages'),
-      '@router': resolve('src/router'),
+      '@css': resolve('src/assets/css'),
+      '@lib': resolve('src/assets/lib'),
+      '@utils': resolve('src/assets/utils'),
+      '@mixin': resolve('src/mixin'),
       '@store': resolve('src/store'),
-      '@lib': resolve('src/lib')
+      '@views': resolve('src/views'),
+      '@router': resolve('src/router'),
+      '@layouts': resolve('src/layouts'),
+      '@plugins': resolve('src/plugins'),
+      '@components': resolve('src/components'),
     }
   },
   module: {
     rules: [
-      ...(config.dev.useEslint ? [createLintingRule()] : []),
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        loader: 'tslint-loader'
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
       {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        // loader: 'ts-loader',
+        use: [
+          "babel-loader",
+          {
+            loader: "ts-loader",
+            options: { appendTsxSuffixTo: [/\.vue$/] }
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -85,16 +105,9 @@ module.exports = {
       }
     ]
   },
-  node: {
-    // prevent webpack from injecting useless setImmediate polyfill because Vue
-    // source contains it (although only uses it if it's native).
-    setImmediate: false,
-    // prevent webpack from injecting mocks to Node native modules
-    // that does not make sense for the client
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
-  }
+  plugins: [
+    new webpack.ProvidePlugin({
+      _: 'lodash'
+    })
+  ]
 }

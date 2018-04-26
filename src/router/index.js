@@ -1,22 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Home = () => import(/* webpackChunkName: "page_home" */'@pages/home')
-const City = () => import(/* webpackChunkName: "page_city" */'@pages/city')
+import Hello from '@/components/Hello'
+import HomePage from '@views/HomePage'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '/homepage',
+      name: 'homepage',
+      component: HomePage
     },
     {
-      path: '/city',
-      name: 'city',
-      component: City
+      path: '/',
+      name: 'Hello',
+      component: Hello
     }
   ]
 })
