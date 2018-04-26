@@ -30,15 +30,15 @@ import BScroll from 'better-scroll'
 export default {
   props: {
     hotCity: {
-      type: Object,
-      default() {
-        return {}
-      }
-    },
-    letterList: {
       type: Array,
       default() {
         return []
+      }
+    },
+    letterList: {
+      type: Object,
+      default() {
+        return {}
       }
     }
   },
@@ -55,8 +55,8 @@ export default {
     })
   },
   mounted() {
-    console.log(this.hotCity)
-    console.log(this.letterList)
+    // console.log(this.hotCity)
+    // console.log(this.letterList)
   }
 }
 </script>
@@ -111,6 +111,7 @@ export default {
     .item
       flex 0 0 25%
       height 120px
+      padding: 0 20px
       line-height 120px
       border-right 2px solid #dedede
       border-bottom 2px solid #dedede

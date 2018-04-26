@@ -40,32 +40,25 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import 'swiper/dist/css/swiper.css'
+import {Vue, Component, Prop} from 'vue-property-decorator'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
-export default {
+@Component({
   components: {
     swiper,
     swiperSlide
-  },
-  props: {
-    items: {
-      type: Array,
-      required: true,
-      default() {
-        return []
-      }
-    }
-  },
-  data() {
-    return {
-      swiperOption: {
-        slidesPerView: 3,
-        direction: 'horizontal',
-        loop: true
-      }
-    }
+  }
+})
+export default class HomeRecommend extends Vue {
+  @Prop({type: Array, required: true, default: []})
+  items: any[]
+
+  swiperOption: any = {
+    slidesPerView: 3,
+    direction: 'horizontal',
+    loop: true
   }
 }
 </script>

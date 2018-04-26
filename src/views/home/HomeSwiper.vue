@@ -14,42 +14,31 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import 'swiper/dist/css/swiper.css'
+import {Vue, Component, Prop} from 'vue-property-decorator'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
-export default {
+@Component({
   components: {
     swiper,
     swiperSlide
-  },
-  props: {
-    items: {
-      type: Array,
-      required: true,
-      default() {
-        return []
-      }
-    }
-  },
-  data() {
-    return {
-      swiperOption: {
-        autoplay: 3000,
-        setWrapperSize: true,
-        autoHeight: true,
-        loop: true,
-        pagination: '.swiper-pagination'
-      }
-    }
-  },
-  computed: {
-    showSwiper() {
-      return this.items.length
-    }
-  },
-  mounted() {
-    // this.swiper.slideTo(3, 1000, false)
+  }
+})
+export default class HomeSwiper extends Vue {
+  @Prop({type: Array, required: true, default: []})
+  items: any[]
+
+  get showSwiper(): number {
+    return this.items.length
+  }
+
+  swiperOption: any = {
+    autoplay: 3000,
+    setWrapperSize: true,
+    autoHeight: true,
+    loop: true,
+    pagination: '.swiper-pagination'
   }
 }
 </script>

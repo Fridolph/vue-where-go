@@ -17,8 +17,8 @@ export default {
   },
   data() {
     return {
-      hotCity: {},
-      letterList: []
+      hotCity: [],
+      letterList: {}
     }
   },
   methods: {
