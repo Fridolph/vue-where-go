@@ -2,7 +2,7 @@
   <section class="home-recommend">
     <h2 class="recommend-title">
       <img class="icon" src="http://img1.qunarzz.com/piao/fusion/1711/16/bfbb9874e8f11402.png" alt="hot">
-      <span>本周热门榜单</span>
+      <span>本周热门推荐榜单</span>
       <a href="javascript:;">全部榜单 ></a>
     </h2>
     <div class="list-wrapper">
@@ -11,7 +11,7 @@
           <a href="javascript:;">
             <div class="tag"></div>
             <div class="img-wrapper">
-              <img :src="item.img" :alt="item.title">
+              <img :src="item.src" :alt="item.title">
             </div>
             <div class="title">{{item.title}}</div>
             <div class="price"><span>￥<em>{{item.price}}</em></span>起</div>
@@ -20,11 +20,11 @@
       </ul> -->
       <swiper :options="swiperOption" ref="homeSwiper">
         <!-- slides -->
-        <swiper-slide v-for="(item,idx) in items" :key="item.img">
+        <swiper-slide v-for="(item,idx) in items" :key="item.title">
           <a href="javascript:;" class="item-wrapper">
             <div :class="`tag tag-${idx}`"></div>
             <div class="img-wrapper">
-              <img :src="item.img" :alt="item.title">
+              <img :src="item.src" :alt="item.title">
             </div>
             <div class="title">{{item.title}}</div>
             <div class="price"><span>￥<em>{{item.price}}</em></span>起</div>
@@ -57,8 +57,7 @@ export default class HomeRecommend extends Vue {
 
   swiperOption: any = {
     slidesPerView: 3,
-    direction: 'horizontal',
-    loop: true
+    direction: 'horizontal'
   }
 }
 </script>

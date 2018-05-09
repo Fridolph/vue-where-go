@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
-import request from '@utils/request'
+import request from '../../utils/request'
 import HomeHeader from './HomeHeader.vue'
 import HomeSwiper from './HomeSwiper.vue'
 import HomeMenu from './HomeMenu.vue'
@@ -53,6 +53,7 @@ export default class Home extends Vue {
     try {
       let {data} = await request.get('/city/chengdu')
       if (data.code !== 0) return data.msg
+      console.log('从服务端拿到数据\n', data)
       this.city = data.data.city
       this.swiperItems = data.data.swiperItems
       this.menuItems = data.data.menuItems

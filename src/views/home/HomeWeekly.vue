@@ -17,7 +17,7 @@
         </li> -->
         <li class="list-item" v-for="item in items" :key="item.title">
           <figure class="img-wrapper">
-            <img :src="item.img" :alt="item.title">
+            <img :src="item.src" :alt="item.title">
           </figure>
           <div class="content">
             <h3>{{item.title}}</h3>

@@ -2,8 +2,8 @@
   <section class="wrapper">
     <swiper :options="swiperOption" ref="homeSwiper" v-if="showSwiper">
       <!-- slides -->
-      <swiper-slide v-for="item in items" :key="item.img">
-        <img class="swiper-img" :src="item.img" alt="轮播图">
+      <swiper-slide v-for="item in items" :key="item.src">
+        <img class="swiper-img" :src="item.src" alt="轮播图">
       </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-pagination" slot="pagination"></div>

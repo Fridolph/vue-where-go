@@ -21,13 +21,13 @@
       </li> -->
       <li class="like-item" v-for="item in items" :key="item.title">
         <div class="img-wrapper">
-          <img :src="item.img" :alt="item.title">
+          <img :src="item.src" :alt="item.title">
         </div>
         <div class="info">
           <h3 class="title">{{item.title}}</h3>
           <div class="comment">
             <div class="star-level">
-              ★★★★★
+              {{'★'.repeat(item.star)}}
             </div>
             <div class="comment-num">{{item.commentNum}}条评论</div>
           </div>

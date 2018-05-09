@@ -16,8 +16,11 @@
   </header>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
+
+@Component
+export default class CityHeader extends Vue {
 }
 </script>
 

@@ -11,52 +11,47 @@
         <dt class="letter-title">字母排序</dt>
         <dd class="zimu-box">
           <!-- <div class="item" v-for="v in letterList" :key="v">{{v}}</div> -->
-          <div class="item" v-for="(v, k, i) in letterList" :key="`_${k}_${i}`">{{k}}</div>
+          <div class="item" v-for="(value, key) in letterList" :key="key">{{key}}</div>
         </dd>
       </dl>
-      <dl class="letter-a" v-for="(v, k, i) in letterList" :key="`_${k}_${i}`">
-        <dt class="letter-title">{{k}}</dt>
+      <dl class="letter-a" v-for="(value, key) in letterList" :key="`_${key}_`">
+        <dt class="letter-title">{{key}}</dt>
         <dd class="letter-box">
-          <div class="item" v-for="item in v" :key="item">{{item}}</div>
+          <div class="item" v-for="item in value" :key="item">{{item}}</div>
         </dd>
       </dl>
     </div>
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator'
 import BScroll from 'better-scroll'
 
-export default {
-  props: {
-    hotCity: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    letterList: {
-      type: Object,
-      default() {
-        return {}
-      }
-    }
-  },
-  methods: {
-    _initScroll() {
-      this.cityListScroll = new BScroll(this.$refs.cityListScroll, {
-        click: true
-      })
-    }
-  },
+@Component
+export default class CityList extends Vue {
+  @Prop({default: []})
+  hotCity: any[]
+
+  @Prop({default: []})
+  letterList: any[]
+
+  $refs: {
+    cityListScroll: HTMLDivElement
+  }
+
+  cityListScroll: Object = {}
+
   created() {
     this.$nextTick(() => {
       this._initScroll()
     })
-  },
-  mounted() {
-    // console.log(this.hotCity)
-    // console.log(this.letterList)
+  }
+
+  _initScroll() {
+    this.cityListScroll = new BScroll(this.$refs.cityListScroll, {
+      click: true
+    })
   }
 }
 </script>
