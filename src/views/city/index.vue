@@ -1,7 +1,7 @@
 <template>
   <section class="page-city">
     <city-header></city-header>
-    <city-list :hotCity="hotCity" :letterList="letterList"></city-list>
+    <city-list :hotCity="hotCity" :letterList="letterList" :letterSortList="letterSortList"></city-list>
   </section>
 </template>
 
@@ -19,7 +19,8 @@ import CityList from './CityList.vue'
 })
 export default class City extends Vue {
   hotCity: any[] = []
-  letterList: any[] = []
+  letterList: Object = {}
+  letterSortList: any[] = []
 
   mounted() {
     this._initData()
@@ -32,6 +33,7 @@ export default class City extends Vue {
       console.log('从服务端拿到citylist', data.data)
       this.hotCity = data.data.hotCity
       this.letterList = data.data.letterList
+      this.letterSortList = data.data.letterSortList
     } catch (err) {
       console.error(err)
     }

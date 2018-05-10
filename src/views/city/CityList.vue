@@ -1,56 +1,86 @@
 <template>
-  <section class="city-list" ref="cityListScroll">
-    <div class="wrapper">
-      <dl class="list-hot">
-        <dt class="hot-title">热门城市</dt>
-        <dd class="hot-box">
-          <div class="item" v-for="v in hotCity" :key="v">{{v}}</div>
-        </dd>
-      </dl>
-      <dl class="list-letter">
-        <dt class="letter-title">字母排序</dt>
-        <dd class="zimu-box">
-          <!-- <div class="item" v-for="v in letterList" :key="v">{{v}}</div> -->
-          <div class="item" v-for="(value, key) in letterList" :key="key">{{key}}</div>
-        </dd>
-      </dl>
-      <dl class="letter-a" v-for="(value, key) in letterList" :key="`_${key}_`">
-        <dt class="letter-title">{{key}}</dt>
-        <dd class="letter-box">
-          <div class="item" v-for="item in value" :key="item">{{item}}</div>
-        </dd>
-      </dl>
-    </div>
-  </section>
+  <div class="page-container">
+    <section class="city-list" ref="cityListScroll">
+      <div class="wrapper">
+        <dl class="list-hot">
+          <dt class="hot-title">热门城市</dt>
+          <dd class="hot-box">
+            <div class="item" v-for="v in hotCity" :key="v">{{v}}</div>
+          </dd>
+        </dl>
+
+        <dl class="list-letter">
+          <dt class="letter-title">字母排序</dt>
+          <dd class="zimu-box">
+            <!-- <div class="item" v-for="v in letterList" :key="v">{{v}}</div> -->
+            <div class="item" v-for="v in letterSortList" :key="v">{{v}}</div>
+          </dd>
+        </dl>
+
+        <!-- <dl class="letter-a" v-for="(value, key) in letterList" :key="`_${key}_`">
+          <dt class="letter-title">{{key}}</dt>
+          <dd class="letter-box">
+            <div class="item" v-for="item in value" :key="item">{{item}}</div>
+          </dd>
+        </dl> -->
+
+        <dl class="letter-a" v-for="(value, key) in letterList" :key="`_${key}_`">
+          <dt class="letter-title" :ref="key">{{key}}</dt>
+          <dd class="letter-columnbox">
+            <div class="item" v-for="item in value" :key="item">{{item}}</div>
+          </dd>
+        </dl>
+      </div>
+
+    </section>
+    <alphabet :list="letterSortList" @change="handleLetterChange" />
+  </div>
 </template>
 
-<script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
-import BScroll from 'better-scroll'
+<script>
+import Bscroll from 'better-scroll'
+import Alphabet from '../../components/alphabet.vue'
 
-@Component
-export default class CityList extends Vue {
-  @Prop({default: []})
-  hotCity: any[]
+export default {
+  components: {
+    Alphabet
+  },
+  props: {
+    hotCity: Array,
+    letterList: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    letterSortList: Array
+  },
+  data() {
+    return {
+      letter: '',
+      cityListScroll: null
+    }
+  },
+  watch: {
+    letter(newVal) {
+      this.cityListScroll.scrollToElement(this.$refs[this.letter][0])
+    }
+  },
 
-  @Prop({default: []})
-  letterList: any[]
-
-  $refs: {
-    cityListScroll: HTMLDivElement
-  }
-
-  cityListScroll: Object = {}
+  methods: {
+    _initScroll() {
+      this.cityListScroll = new Bscroll(this.$refs.cityListScroll, {
+        click: true
+      })
+    },
+    handleLetterChange(letter) {
+      this.letter = letter
+    }
+  },
 
   created() {
     this.$nextTick(() => {
       this._initScroll()
-    })
-  }
-
-  _initScroll() {
-    this.cityListScroll = new BScroll(this.$refs.cityListScroll, {
-      click: true
     })
   }
 }
@@ -58,7 +88,9 @@ export default class CityList extends Vue {
 
 <style lang="stylus" scoped>
 @import '~@css/base.styl';
-
+.page-container
+  width 100vw
+  height 100vh
 .city-list
   position absolute
   left 0
@@ -111,6 +143,24 @@ export default class CityList extends Vue {
       border-right 2px solid #dedede
       border-bottom 2px solid #dedede
       text-align center
+      font-size 45px
+      ellipsis()
+
+  .letter-title
+    text-align left
+  .letter-columnbox
+    display flex
+    flex-direction column
+    align-items center
+    flex-wrap wrap
+    .item
+      width 100%
+      height 120px
+      padding 0 80px
+      line-height 120px
+      border-right 2px solid #dedede
+      border-bottom 2px solid #dedede
+      text-align left
       font-size 45px
       ellipsis()
 </style>
