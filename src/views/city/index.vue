@@ -1,7 +1,7 @@
 <template>
   <section class="page-city">
-    <city-header></city-header>
-    <city-list :hotCity="hotCity" :letterList="letterList" :letterSortList="letterSortList"></city-list>
+    <city-header :cities="cities"></city-header>
+    <city-list :hotCities="hotCities" :cities="cities"></city-list>
   </section>
 </template>
 
@@ -18,9 +18,8 @@ import CityList from './CityList.vue'
   }
 })
 export default class City extends Vue {
-  hotCity: any[] = []
-  letterList: Object = {}
-  letterSortList: any[] = []
+  hotCities: any[] = []
+  cities: Object = {}
 
   mounted() {
     this._initData()
@@ -31,12 +30,17 @@ export default class City extends Vue {
       let {data} = await request.get('/citylist')
       if (data.code !== 0) return data.msg
       console.log('从服务端拿到citylist', data.data)
-      this.hotCity = data.data.hotCity
-      this.letterList = data.data.letterList
-      this.letterSortList = data.data.letterSortList
+      this.hotCities = data.data.hotCities
+      this.cities = data.data.cities
     } catch (err) {
       console.error(err)
     }
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.page-city
+  width 100vw
+  height 100vh
+</style>

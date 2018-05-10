@@ -2,12 +2,11 @@
   <ul class="list" ref="sidelist">
     <li
       class="item"
-      :class="clickedLetter === v ? 'active' : ''"
-      :key="v"
-      :ref="v"
-      v-for="v in list"
+      :key="key"
+      :ref="key"
+      v-for="(item, key) of list"
       @click="handleLetterClick"
-    >{{v}}</li>
+    >{{key}}</li>
   </ul>
 </template>
 
@@ -24,7 +23,7 @@ export default class Alphabet extends Vue {
   }
   // 定义data
   clickedLetter: string = ''
-  touchStatus: boolean = false
+  // touchStatus: boolean = false
 
   handleLetterClick(e) {
     this.$emit('change', e.target.innerText)
@@ -64,7 +63,7 @@ export default class Alphabet extends Vue {
 <style lang="stylus" scoped>
 .list
   position fixed
-  z-index 100
+  z-index 10
   right 0
   top 400px
   display flex
