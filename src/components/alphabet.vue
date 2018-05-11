@@ -2,7 +2,8 @@
   <ul class="list" ref="sidelist">
     <li
       class="item"
-      :key="key"
+      :class="key === clickedLetter ? 'active' : ''"
+      :key="'index-' + key"
       :ref="key"
       v-for="(item, key) of list"
       @click="handleLetterClick"
@@ -18,44 +19,25 @@ export default class Alphabet extends Vue {
   @Prop({default: []})
   list: any[]
 
+  @Prop({default: 'A'})
+  currentLetter: string
+
   $refs: {
     sidelist: HTMLDivElement
   }
   // 定义data
-  clickedLetter: string = ''
+  clickedLetter: string = this.currentLetter
   // touchStatus: boolean = false
 
   handleLetterClick(e) {
-    this.$emit('change', e.target.innerText)
+    this.$emit('letterChange', e.target.innerText)
     this.clickedLetter = e.target.innerText
     console.log('点击了字母', e.target.innerText)
   }
 
-  // handleTouchStart(e) {
-  //   this.touchStatus = true
-  // }
-
-  // handleTouchMove(e) {
-  //   if (this.touchStatus) {
-  //     const startY = this.startY
-  //     const touchY = e.touches[0].clientY
-  //     const height = this.$refs['a'][0].clientHeight
-  //     const listHeight = this.$refs.sidelist.clientHeight
-  //     const index = Math.floor((touchY - startY) / height)
-  //     if (touchY < 250 || touchY > startY + listHeight) {
-  //       return false
-  //     } else {
-  //       if (index >= 0 && index < this.list.length) {
-  //         this.$emit('change', this.list[index])
-  //         this.clickedLetter = this.list[index]
-  //         // console.log('触发了change', this.list[index])
-  //       }
-  //     }
-  //   }
-  // }
-
-  // handleTouchEnd(e) {
-  //   this.touchStatus = false
+  // moveToLetter(letter) {
+  //   console.log('触发了moveToLetter事件', letter)
+  //   // this.clickedLetter = letter.toUppercase()
   // }
 }
 </script>
@@ -80,4 +62,6 @@ export default class Alphabet extends Vue {
     display block
     width 100%
     text-align center
+  .active
+    color #00bcd4
 </style>

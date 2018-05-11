@@ -1,20 +1,21 @@
 <template>
   <div class="page-home">
-    <home-header :city="city"></home-header>
-    <home-swiper :items="swiperItems"></home-swiper>
-    <home-menu :items="menuItems"></home-menu>
+    <home-header />
+    <home-swiper :items="swiperItems" />
+    <home-menu :items="menuItems" />
     <split />
-    <home-recommend :items="recommendItems"></home-recommend>
+    <home-recommend :items="recommendItems" />
     <split />
-    <home-like :items="likeItems"></home-like>
+    <home-like :items="likeItems" />
     <split />
-    <home-weekly :items="weeklyItems"></home-weekly>
-    <layout-footer></layout-footer>
+    <home-weekly :items="weeklyItems" />
+    <layout-footer />
   </div>
 </template>
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
+import {Getter} from 'vuex-class'
 import request from '../../utils/request'
 import HomeHeader from './HomeHeader.vue'
 import HomeSwiper from './HomeSwiper.vue'
@@ -38,28 +39,56 @@ import LayoutFooter from '@layouts/LFooter.vue'
   }
 })
 export default class Home extends Vue {
-  city: string = ''
   swiperItems: any[] = []
   menuItems: any[] = []
   recommendItems: any[] = []
   likeItems: any[] = []
   weeklyItems: any[] = []
+  lastCity: string = ''
 
-  created() {
+  @Getter('currentCity') currentCity
+
+  mounted() {
     this._initData()
+    this.lastCity = this.currentCity
+    console.log('当前城市', this.currentCity)
   }
 
-  async _initData() {
-    try {
-      let {data} = await request.get('/city/chengdu')
+  async activated() {
+    if (this.lastCity !== this.currentCity) {
+      let {data} = await request.get(`/city/chengdu?city=${this.currentCity}`)
       if (data.code !== 0) return data.msg
       // console.log('从服务端拿到数据\n', data)
-      this.city = data.data.city
+      sessionStorage.setItem('city/chengdu', JSON.stringify(data))
       this.swiperItems = data.data.swiperItems
       this.menuItems = data.data.menuItems
       this.recommendItems = data.data.recommendItems
       this.likeItems = data.data.likeItems
       this.weeklyItems = data.data.weeklyItems
+    }
+  }
+
+  async _initData() {
+    let cache = sessionStorage['city/chengdu']
+    try {
+      if (cache) {
+        const data = JSON.parse(cache)
+        this.swiperItems = data.data.swiperItems
+        this.menuItems = data.data.menuItems
+        this.recommendItems = data.data.recommendItems
+        this.likeItems = data.data.likeItems
+        this.weeklyItems = data.data.weeklyItems
+      } else {
+        let {data} = await request.get(`/city/chengdu?city=${this.currentCity}`)
+        if (data.code !== 0) return data.msg
+        // console.log('从服务端拿到数据\n', data)
+        sessionStorage.setItem('city/chengdu', JSON.stringify(data))
+        this.swiperItems = data.data.swiperItems
+        this.menuItems = data.data.menuItems
+        this.recommendItems = data.data.recommendItems
+        this.likeItems = data.data.likeItems
+        this.weeklyItems = data.data.weeklyItems
+      }
     } catch (err) {
       console.error(err)
     }

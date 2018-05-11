@@ -26,12 +26,20 @@ export default class City extends Vue {
   }
 
   async _initData() {
+    let cache = sessionStorage.getItem('city/citylist')
     try {
-      let {data} = await request.get('/citylist')
-      if (data.code !== 0) return data.msg
-      console.log('从服务端拿到citylist', data.data)
-      this.hotCities = data.data.hotCities
-      this.cities = data.data.cities
+      if (cache) {
+        console.log('从本地缓存拿citylist', JSON.parse(cache))
+        this.hotCities = (JSON.parse(cache)).hotCities
+        this.cities = (JSON.parse(cache)).cities
+      } else {
+        let {data} = await request.get('/citylist')
+        if (data.code !== 0) return data.msg
+        console.log('从服务端拿citylist', data.data)
+        this.hotCities = data.data.hotCities
+        this.cities = data.data.cities
+        sessionStorage.setItem('city/citylist', JSON.stringify(data.data))
+      }
     } catch (err) {
       console.error(err)
     }

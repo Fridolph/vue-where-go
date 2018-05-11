@@ -1,5 +1,5 @@
 const getters = {
-  city: state => state.city
+  currentCity: state => state.city.currentCity
 }
 
 export default getters
