@@ -6,35 +6,20 @@
       <a href="javascript:;">全部榜单 ></a>
     </h2>
     <div class="list-wrapper">
-      <!-- <ul class="recommend-list">
-        <li class="list-item" v-for="item in items" :key="item.title">
-          <a href="javascript:;">
-            <div class="tag"></div>
-            <div class="img-wrapper">
-              <img :src="item.src" :alt="item.title">
-            </div>
-            <div class="title">{{item.title}}</div>
-            <div class="price"><span>￥<em>{{item.price}}</em></span>起</div>
-          </a>
-        </li>
-      </ul> -->
       <swiper :options="swiperOption" ref="homeSwiper">
         <!-- slides -->
         <swiper-slide v-for="(item,idx) in items" :key="item.title">
-          <a href="javascript:;" class="item-wrapper">
+          <router-link :to="`/detail/${item.title}`" class="item-wrapper">
             <div :class="`tag tag-${idx}`"></div>
             <div class="img-wrapper">
               <img :src="item.src" :alt="item.title">
             </div>
             <div class="title">{{item.title}}</div>
             <div class="price"><span>￥<em>{{item.price}}</em></span>起</div>
-          </a>
+          </router-link>
         </swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
-        <!-- <div class="swiper-button-prev" slot="button-prev"></div> -->
-        <!-- <div class="swiper-button-next" slot="button-next"></div> -->
-        <!-- <div class="swiper-scrollbar"   slot="scrollbar"></div> -->
       </swiper>
     </div>
   </section>

@@ -27,7 +27,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 })
 export default class HomeSwiper extends Vue {
   @Prop({type: Array, required: true, default: []})
-  items: any[]
+  items
 
   get showSwiper(): number {
     return this.items.length
@@ -44,12 +44,6 @@ export default class HomeSwiper extends Vue {
 </script>
 
 <style lang="stylus" scoped>
-.wrapper >>> .swiper-pagination-bullet-active
-  background rgba(255,255,255,0.7)
-.wrapper >>> .swiper-pagination-bullet
-  width 26px
-  height 26px
-  margin: 8px 10px
 .wrapper
   overflow hidden
   width 100%
@@ -59,9 +53,16 @@ export default class HomeSwiper extends Vue {
   .swiper-slide
     .swiper-img
       width 100%
-
+      height 100%
 </style>
 
-<style>
-
+<style lang="stylus">
+.wrapper
+  .swiper-pagination-bullet-active
+    background rgba(255,255,255,0.7)
+.wrapper
+  .swiper-pagination-bullet
+    width 26px
+    height 26px
+    margin: 8px 10px
 </style>

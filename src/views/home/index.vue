@@ -48,7 +48,7 @@ export default class Home extends Vue {
 
   @Getter('currentCity') currentCity
 
-  mounted() {
+  created() {
     this._initData()
     this.lastCity = this.currentCity
     console.log('当前城市', this.currentCity)

@@ -86,8 +86,7 @@ export default {
   methods: {
     _initScroll() {
       this.cityListScroll = new Bscroll(this.$refs.cityListScroll, {
-        click: true,
-        probeType: 2
+        click: true
       })
       this.scrollYPoint = []
       Object.keys(this.cities).forEach(letter => {
@@ -97,10 +96,10 @@ export default {
     },
 
     scrollAndChangeLetter(pos) {
-      let scrollY = Math.abs(pos.y)
-      // let prevPoint = 0
-      let nextPoint = this.scrollYPoint[this.index]
-      console.log(scrollY, nextPoint)
+      // let scrollY = Math.abs(pos.y)
+      // // let prevPoint = 0
+      // let nextPoint = this.scrollYPoint[this.index]
+      // console.log(scrollY, nextPoint)
     },
 
     handleLetterChange(letter) {
@@ -110,7 +109,7 @@ export default {
     selectCity(cityName) {
       console.log('当前选择城市', cityName)
       this.updateCity(cityName)
-      this.$router.push(`/home`)
+      this.$router.push(`/`)
     },
 
     ...mapMutations({

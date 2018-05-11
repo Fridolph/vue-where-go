@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Home = () => import(/* webpackChunkName: "page_home" */'@views/home/index.vue')
-const City = () => import(/* webpackChunkName: "page_city" */'@views/city/index.vue')
+const Home = () => import(/* webpackChunkName: "views_home" */'@views/home/index.vue')
+const City = () => import(/* webpackChunkName: "views_city" */'@views/city/index.vue')
+const Detail = () => import(/* webpackChunkName: "views_detail" */'@views/detail/index.vue')
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export default new Router({
       path: '/city',
       name: 'city',
       component: City
+    },
+    {
+      path: '/detail/:pname',
+      name: 'detail',
+      component: Detail
     }
   ]
 })

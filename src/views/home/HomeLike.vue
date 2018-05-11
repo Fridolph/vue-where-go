@@ -5,21 +5,7 @@
       <span>猜你喜欢</span>
     </h2>
     <ul class="like-list-wrapper">
-      <!-- <li class="like-item">
-        <img src="http://img1.qunarzz.com/sight/p0/1712/5d/5d4f18e64813d0f6a3.img.jpg_200x200_2a260ea1.jpg" alt="img">
-        <div class="info">
-          <h3 class="title">成都欢乐谷</h3>
-          <div class="comment">
-            <div class="star-level">5星</div>
-            <div class="comment-num">2312条评论</div>
-          </div>
-          <div class="price">
-            <span class="m-price">￥<em>54</em></span>起
-            <span class="addr">金牛区</span>
-          </div>
-        </div>
-      </li> -->
-      <li class="like-item" v-for="item in items" :key="item.title">
+      <router-link tag="li" :to="`/detail/${item.title}`" class="like-item" v-for="item in items" :key="item.title">
         <div class="img-wrapper">
           <img :src="item.src" :alt="item.title">
         </div>
@@ -39,7 +25,7 @@
             {{item.popular}}
           </div>
         </div>
-      </li>
+      </router-link>
     </ul>
     <div class="list-more-wrapper">
       <a href="javascript:;">查看更多产品</a>

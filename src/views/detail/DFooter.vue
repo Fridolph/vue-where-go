@@ -7,9 +7,8 @@
 <style lang="stylus" scoped>
 .layout-footer
   background-color #efefef
-  margin-top 20px
   padding: 0.5rem 0
   color #999
   text-align center
-  font-size 42px
+  font-size 20px
 </style>

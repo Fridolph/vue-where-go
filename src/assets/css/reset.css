@@ -2,5 +2,14 @@
 ol,ul,li {list-style: none;}
 html {color: #444;}
 a {text-decoration: none; color: #666;}
-
-@import url('http://at.alicdn.com/t/font_637128_7yy02erkmm5i2j4i.css')
+h1,h2,h3,h4,h5,h6 {
+  font-weight: normal;
+}
+i,em,strong {font-style: normal;}
+h1 { font-size: 60px; }
+h2 { font-size: 45px; }
+h3 { font-size: 40px; }
+h4 { font-size: 36px; }
+h5 { font-size: 32px; }
+h6 { font-size: 28px; }
+@import url('//at.alicdn.com/t/font_637128_91coqgnjf5wdygb9.css')
