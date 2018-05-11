@@ -5,11 +5,11 @@ let cancel = null
 let promiseArr = {}
 const CancelToken = axios.CancelToken
 
-axios.defaults.baseURL = ' http://mock.fridolph.wang/mock/5adf417db6bbcd7473ff1e3e/qunar'
+axios.defaults.baseURL = '/api'
 axios.defaults.headers = {
   'X-Requested-With': 'XMLHttpRequest'
 }
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 3000
 
 // 请求拦截器
 axios.interceptors.request.use(config => {

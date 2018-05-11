@@ -2,7 +2,7 @@
   <section class="home-menu">
     <div class="menu-wrapper">
       <div class="menu-item" v-for="item in items" :key="item.title">
-        <img :src="item.img" :alt="item.title">
+        <img :src="item.src" :alt="item.title">
         <p>{{item.title}}</p>
       </div>
     </div>

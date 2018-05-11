@@ -3,10 +3,10 @@
     <div class="header-left">
       <i class="iconfont">&#xe624;</i>
     </div>
-    <div class="header-input"><i class="iconfont">&#xe632;</i> 输入城市/游玩/精选/主题</div>
+    <router-link to="/city" class="header-input"><i class="iconfont">&#xe632;</i> 输入城市/游玩/精选/主题</router-link>
     <router-link to="/city">
       <div class="header-right">
-        <span>{{city}}</span>
+        <span>{{currentCity}}</span>
         <i class="iconfont">&#xe65e;</i>
       </div>
     </router-link>
@@ -14,12 +14,12 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
+import {Vue, Component} from 'vue-property-decorator'
+import {Getter} from 'vuex-class'
 
 @Component
 export default class HomeHeader extends Vue {
-  @Prop({default: '城市'})
-  city: string
+  @Getter('currentCity') currentCity
 }
 </script>
 
@@ -53,7 +53,8 @@ export default class HomeHeader extends Vue {
       font-size 48px
   .header-right
     float right
-    width 180px
+    min-width 160px
+    padding-right 20px
     text-align center
     line-height $headerHeight
     text-align center
