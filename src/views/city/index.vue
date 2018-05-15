@@ -26,7 +26,7 @@ export default class City extends Vue {
   }
 
   async _initData() {
-    let cache = sessionStorage.getItem('city/citylist')
+    let cache = localStorage.getItem('city/citylist')
     try {
       if (cache) {
         console.log('从本地缓存拿citylist', JSON.parse(cache))
@@ -38,7 +38,7 @@ export default class City extends Vue {
         console.log('从服务端拿citylist', data.data)
         this.hotCities = data.data.hotCities
         this.cities = data.data.cities
-        sessionStorage.setItem('city/citylist', JSON.stringify(data.data))
+        localStorage.setItem('city/citylist', JSON.stringify(data.data))
       }
     } catch (err) {
       console.error(err)

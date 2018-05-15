@@ -1,6 +1,8 @@
 <template>
   <section class="page-detail">
-    <d-header :baseInfo="baseInfo" :galleryImgs="galleryImgs" />
+    <fixed-header />
+
+    <d-info :baseInfo="baseInfo" :galleryImgs="galleryImgs" />
 
     <d-recommend :recommendList="recommendList" />
 
@@ -12,7 +14,8 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
-import DHeader from './DHeader.vue'
+import FixedHeader from '../../components/FixedHeader.vue'
+import DInfo from './DInfo.vue'
 import DRecommend from './DRecommend.vue'
 import DComment from './DComment.vue'
 import DFooter from './DFooter.vue'
@@ -20,7 +23,8 @@ import request from '../../utils/request'
 
 @Component({
   components: {
-    DHeader,
+    FixedHeader,
+    DInfo,
     DRecommend,
     DComment,
     DFooter
@@ -37,19 +41,20 @@ export default class Detail extends Vue {
   }
 
   async _initData() {
-    let cache = sessionStorage['detail/cd0001']
+    let cache = localStorage['detail/cd0001']
     try {
       if (cache) {
         const data = JSON.parse(cache)
         console.log('本地缓存拿数据\n', data)
         this.baseInfo = data.data.baseInfo
+        this.galleryImgs = data.data.galleryImgs
         this.recommendList = data.data.recommendList
         this.commentList = data.data.commentList
       } else {
         let {data} = await request.get(`/detail/cd0001`)
         if (data.code !== 0) return data.msg
         console.log('从服务端拿数据\n', data)
-        sessionStorage.setItem('detail/cd0001', JSON.stringify(data))
+        localStorage.setItem('detail/cd0001', JSON.stringify(data))
         this.baseInfo = data.data.baseInfo
         this.galleryImgs = data.data.galleryImgs
         this.recommendList = data.data.recommendList

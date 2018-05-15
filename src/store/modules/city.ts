@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-05-11 14:53:56
  */
 
-let defaultCity = sessionStorage.currentCity
+let defaultCity = localStorage.currentCity
 
 export default {
   state: {
@@ -16,7 +16,7 @@ export default {
     updateCity: (state, newCity) => {
       state.currentCity = newCity
       try {
-        sessionStorage.currentCity = newCity
+        localStorage.currentCity = newCity
       } catch (e) {
         console.error(e)
       }

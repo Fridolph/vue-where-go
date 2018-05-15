@@ -1,15 +1,12 @@
 <template>
-  <div class="detail-header">
-    <div class="go-back" @click="$router.go(-1)">
-      <i class="iconfont icon-fanhui"></i>
-    </div>
+  <div class="detail-info">
     <gallery :items="galleryImgs" v-show="isShow" @closeGallery="closeGallery"/>
     <figure class="img-wrapper">
       <img :src="baseInfo.posterImg" :alt="baseInfo.title" @click="handlePosterClick">
       <h1>{{baseInfo.title}}</h1>
       <div class="img-total">
         <i class="iconfont icon-weibiaoti1"></i>
-        <span>{{galleryImgs.length}}</span>
+        <span>{{galleryImgs && galleryImgs.length}}</span>
       </div>
     </figure>
     <div class="detail-wrapper">
@@ -78,27 +75,9 @@ export default class DHeader extends Vue {
 
 <style lang="stylus" scoped>
 @import '~@css/base.styl';
-.detail-header
+.detail-info
   background-color #fff
   // position relative
-
-  .go-back
-    position absolute
-    z-index 20
-    left 40px
-    top 30px
-    background rgba(0,0,0,0.5)
-    border-radius 50%
-    width 100px
-    height 100px
-    display flex
-    justify-content center
-    align-items center
-    i
-      font-size 50px
-      color #fff
-      font-weight bold
-
   .img-wrapper
     position relative
     padding-bottom 55%

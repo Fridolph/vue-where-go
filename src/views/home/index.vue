@@ -59,7 +59,7 @@ export default class Home extends Vue {
       let {data} = await request.get(`/city/chengdu?city=${this.currentCity}`)
       if (data.code !== 0) return data.msg
       // console.log('从服务端拿到数据\n', data)
-      sessionStorage.setItem('city/chengdu', JSON.stringify(data))
+      localStorage.setItem('city/chengdu', JSON.stringify(data))
       this.swiperItems = data.data.swiperItems
       this.menuItems = data.data.menuItems
       this.recommendItems = data.data.recommendItems
@@ -69,7 +69,7 @@ export default class Home extends Vue {
   }
 
   async _initData() {
-    let cache = sessionStorage['city/chengdu']
+    let cache = localStorage['city/chengdu']
     try {
       if (cache) {
         const data = JSON.parse(cache)
@@ -82,7 +82,7 @@ export default class Home extends Vue {
         let {data} = await request.get(`/city/chengdu?city=${this.currentCity}`)
         if (data.code !== 0) return data.msg
         // console.log('从服务端拿到数据\n', data)
-        sessionStorage.setItem('city/chengdu', JSON.stringify(data))
+        localStorage.setItem('city/chengdu', JSON.stringify(data))
         this.swiperItems = data.data.swiperItems
         this.menuItems = data.data.menuItems
         this.recommendItems = data.data.recommendItems
