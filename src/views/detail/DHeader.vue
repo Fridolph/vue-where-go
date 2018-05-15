@@ -3,13 +3,13 @@
     <div class="go-back" @click="$router.go(-1)">
       <i class="iconfont icon-fanhui"></i>
     </div>
-    <gallery v-show="isShow" @closeGallery="closeGallery"/>
+    <gallery :items="galleryImgs" v-show="isShow" @closeGallery="closeGallery"/>
     <figure class="img-wrapper">
       <img :src="baseInfo.posterImg" :alt="baseInfo.title" @click="handlePosterClick">
       <h1>{{baseInfo.title}}</h1>
       <div class="img-total">
         <i class="iconfont icon-weibiaoti1"></i>
-        <span>14</span>
+        <span>{{galleryImgs.length}}</span>
       </div>
     </figure>
     <div class="detail-wrapper">
@@ -56,6 +56,9 @@ import {Mutation, State, namespace} from 'vuex-class' // eslint-disable-line
 export default class DHeader extends Vue {
   @Prop({type: Object, default: {}})
   baseInfo
+
+  @Prop({type: Array, default: []})
+  galleryImgs
 
   isShow: boolean = false
 

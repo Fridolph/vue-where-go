@@ -1,10 +1,10 @@
 <template>
   <section class="page-detail">
-    <d-header :baseInfo="baseInfo"></d-header>
+    <d-header :baseInfo="baseInfo" :galleryImgs="galleryImgs" />
 
-    <d-recommend :recommendList="recommendList"></d-recommend>
+    <d-recommend :recommendList="recommendList" />
 
-    <d-comment :commentList="commentList"></d-comment>
+    <d-comment :commentList="commentList" />
 
     <d-footer></d-footer>
   </section>
@@ -30,6 +30,7 @@ export default class Detail extends Vue {
   baseInfo: any = {}
   recommendList: any[] = []
   commentList: any[] = []
+  galleryImgs: any[] = []
 
   created() {
     this._initData()
@@ -50,6 +51,7 @@ export default class Detail extends Vue {
         console.log('从服务端拿数据\n', data)
         sessionStorage.setItem('detail/cd0001', JSON.stringify(data))
         this.baseInfo = data.data.baseInfo
+        this.galleryImgs = data.data.galleryImgs
         this.recommendList = data.data.recommendList
         this.commentList = data.data.commentList
       }

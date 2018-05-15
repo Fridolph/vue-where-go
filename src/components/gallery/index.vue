@@ -3,21 +3,28 @@
     <div class="go-back">
       <i class="iconfont icon-fanhui"></i>
     </div>
-    <div class="wrapper">
-      <swiper :options="swiperOptions" ref="detailGallerySwiper">
-        <swiper-slide v-for="v in items" :key="v">
+    <div class="swiper-container">
+      <swiper :options="swiperOptions" ref="gallerySwiper">
+        <swiper-slide v-for="(v, i) in items" :key="i">
           <img class="swiper-img" :src="v">
         </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
+
+        <!-- <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div> -->
       </swiper>
+      <!-- <div class="swiper-note">
+        <span class="current">{{idx}}</span>
+        /
+        <span class="total">{{items.length}}</span>
+      </div> -->
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import 'swiper/dist/css/swiper.css'
-import {Vue, Component, Emit} from 'vue-property-decorator'
+import {Vue, Component, Prop, Emit} from 'vue-property-decorator'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
 @Component({
   components: {
@@ -26,32 +33,39 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
   }
 })
 export default class Gallery extends Vue {
+  @Prop({type: Array, default: []})
+  items
+
   swiperOptions: any = {
+    observer: true,
+    observeParents: true
   }
 
-  items: any[] = [
-    'http://img1.qunarzz.com/sight/p0/201309/24/977fea7b3c5cd758c8d65eac.jpg_r_800x800_3755d9a0.jpg',
-    'http://img1.qunarzz.com/wugc/p59/201207/27/762b530b2ed2288293835fbb.jpg_r_800x800_7b6da46c.jpg',
-    'http://img1.qunarzz.com/wugc/p216/201207/16/40e62ea907230da393835fbb.jpg_r_800x800_949f826e.jpg'
-  ]
+  idx: number = 1
 
-  mounted() {
-    this.$nextTick(() => {
-      this.swiperOptions = {
-        observer: true,
-        observeParents: true
-      }
-    })
+  $refs: {
+    gallerySwiper: any
+  }
+
+  get swiper() {
+    return this.$refs.gallerySwiper.swiper
   }
 
   @Emit('closeGallery')
   handleGalleryClick() {
+  }
 
+  mounted() {
+    let that = this
+    this.swiper.on('click mousedown', e => {
+      console.log(that.swiper.activeIndex)
+      that.idx = that.swiper.activeIndex + 1
+    })
   }
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .gallery-container
   position fixed
   top 0
@@ -65,16 +79,22 @@ export default class Gallery extends Vue {
   display flex
   justify-content center
   align-items center
-  .wrapper
+  color #fff
+  .swiper-container
     // overflow hidden
-    width 100%
-    height 0
-    padding-bottom 100%
+    // width 100%
+    // height 0
+    // padding-bottom 100%
     .swiper-slide
       .swiper-img
         width 100%
-    .swiper-pagination
+    .swiper-note
+      position fixed
       color #fff
+      bottom 160px
+      left 50%
+      transform translateX(-50%)
+      text-align center
 
   .go-back
     position absolute
@@ -92,4 +112,9 @@ export default class Gallery extends Vue {
       font-size 50px
       color #fff
       font-weight bold
+</style>
+
+<style lang="stylus">
+.swiper-wrapper
+  width 100%
 </style>
