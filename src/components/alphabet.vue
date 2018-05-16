@@ -2,7 +2,7 @@
   <ul class="list" ref="sidelist">
     <li
       class="item"
-      :class="key === clickedLetter ? 'active' : ''"
+      :class="key === letter ? 'active' : ''"
       :key="'index-' + key"
       :ref="key"
       v-for="(item, key) of list"
@@ -12,33 +12,38 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
+import {Mutation, Getter} from 'vuex-class'
 
 @Component
 export default class Alphabet extends Vue {
   @Prop({default: []})
   list: any[]
 
-  @Prop({default: 'A'})
-  currentLetter: string
-
   $refs: {
     sidelist: HTMLDivElement
   }
-  // 定义data
-  clickedLetter: string = this.currentLetter
-  // touchStatus: boolean = false
 
-  handleLetterClick(e) {
-    this.$emit('letterChange', e.target.innerText)
-    this.clickedLetter = e.target.innerText
-    console.log('点击了字母', e.target.innerText)
+  @Getter('currentLetter') currentLetter
+
+  letter: string = ''
+
+  @Watch('currentLetter')
+  letterChange(newVal) {
+    setTimeout(() => {
+      this.letter = newVal
+    }, 50)
   }
 
-  // moveToLetter(letter) {
-  //   console.log('触发了moveToLetter事件', letter)
-  //   // this.clickedLetter = letter.toUppercase()
-  // }
+  @Mutation('setLetter') setLetter
+
+  handleLetterClick(e) {
+    let text = e.target.innerText
+    this.letter = text
+    this.setLetter(text)
+    this.$emit('cityLetterChange', text)
+    console.log('派发事件 cityLetterChange', text)
+  }
 }
 </script>
 

@@ -13,17 +13,26 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        title: '去哪儿 - 城市'
+      }
     },
     {
       path: '/city',
       name: 'city',
-      component: City
+      component: City,
+      meta: {
+        title: '去哪儿 - 选择城市'
+      }
     },
     {
       path: '/detail/:pname',
       name: 'detail',
-      component: Detail
+      component: Detail,
+      meta: {
+        title: '去哪儿 - 详情'
+      }
     }
   ]
 })

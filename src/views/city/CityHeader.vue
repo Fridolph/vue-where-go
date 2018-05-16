@@ -84,7 +84,7 @@ export default {
     selectCity(cityName) {
       console.log('当前选择城市', cityName)
       this.updateCity(cityName)
-      this.$router.push(`/home`)
+      this.$router.push(`/`)
     },
 
     ...mapMutations({

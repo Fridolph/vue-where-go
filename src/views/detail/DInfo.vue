@@ -1,6 +1,10 @@
 <template>
   <div class="detail-info">
+    <fade>
+      <gallery :items="galleryImgs" v-show="isShow" @closeGallery="closeGallery"/>
+    </fade>
     <gallery :items="galleryImgs" v-show="isShow" @closeGallery="closeGallery"/>
+
     <figure class="img-wrapper">
       <img :src="baseInfo.posterImg" :alt="baseInfo.title" @click="handlePosterClick">
       <h1>{{baseInfo.title}}</h1>
@@ -9,6 +13,7 @@
         <span>{{galleryImgs && galleryImgs.length}}</span>
       </div>
     </figure>
+
     <div class="detail-wrapper">
       <div class="row-item">
         <div class="item left">
@@ -41,13 +46,15 @@
 import {Vue, Component, Prop} from 'vue-property-decorator'
 import Gallery from '../../components/gallery/index.vue'
 import {Mutation, State, namespace} from 'vuex-class' // eslint-disable-line
+import Fade from '../../components/transition/fade.vue'
 
 // const DetailMutation = namespace('detail', Mutation)
 // const DetailState = namespace('detail', State)
 
 @Component({
   components: {
-    Gallery
+    Gallery,
+    Fade
   }
 })
 export default class DHeader extends Vue {

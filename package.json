@@ -4,7 +4,7 @@
   "description": "vue-typescript-starter",
   "author": "fridolph <249121486@qq.com>",
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "node build/dev-server.js --host 0.0.0.0",
     "start": "npm run dev",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"

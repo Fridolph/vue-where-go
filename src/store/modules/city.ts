@@ -2,14 +2,15 @@
  * @Author: fridolph
  * @Date: 2018-05-10 09:06:57
  * @Last Modified by: fridolph
- * @Last Modified time: 2018-05-11 14:53:56
+ * @Last Modified time: 2018-05-16 16:35:30
  */
 
 let defaultCity = localStorage.currentCity
 
 export default {
   state: {
-    currentCity: defaultCity || '成都'
+    currentCity: defaultCity || '成都',
+    currentLetter: ''
   },
 
   mutations: {
@@ -19,6 +20,13 @@ export default {
         localStorage.currentCity = newCity
       } catch (e) {
         console.error(e)
+      }
+    },
+    setLetter: (state, letter) => {
+      if (state.currentLetter === letter) {
+        // console.log('当前letter', letter)
+      } else {
+        state.currentLetter = letter
       }
     }
   },

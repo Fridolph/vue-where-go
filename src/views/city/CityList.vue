@@ -32,7 +32,7 @@
         </dl>
       </div>
 
-      <alphabet :list="cities" @letterChange="handleLetterChange" :currentLetter="letter" />
+      <alphabet @cityLetterChange="toLetter" :list="cities" :currentLetter="letter" />
     </section>
   </div>
 </template>
@@ -59,18 +59,19 @@ export default {
     return {
       letter: '',
       scrollY: 0,
-      index: 0
+      index: 0,
+      scrollYPoint: []
     }
   },
 
   computed: {
-    ...mapGetters(['currentCity'])
+    ...mapGetters(['currentCity', 'currentLetter'])
   },
 
   watch: {
     letter(newVal) {
       if (this.letter) {
-        // console.log('cityList拿到字母', this.letter)
+        console.log('cityList拿到字母', this.letter)
         this.letter = newVal
         this.cityListScroll.scrollToElement(this.$refs[this.letter][0], 300)
       }
@@ -84,22 +85,78 @@ export default {
   },
 
   methods: {
-    _initScroll() {
+    async _initScroll() {
       this.cityListScroll = new Bscroll(this.$refs.cityListScroll, {
-        click: true
+        click: true,
+        probeType: 3
       })
-      this.scrollYPoint = []
-      Object.keys(this.cities).forEach(letter => {
+
+      await Object.keys(this.cities).forEach(letter => {
         this.scrollYPoint.push(this.$refs[letter][0].offsetTop)
       })
-      this.cityListScroll.on('scroll', this.scrollAndChangeLetter)
+
+      this.cityListScroll.on('scroll', this.scrollList)
     },
 
-    scrollAndChangeLetter(pos) {
-      // let scrollY = Math.abs(pos.y)
-      // // let prevPoint = 0
-      // let nextPoint = this.scrollYPoint[this.index]
-      // console.log(scrollY, nextPoint)
+    toLetter(letter) {
+      this.cityListScroll.scrollToElement(this.$refs[letter][0], 300)
+    },
+
+    scrollToLetter(letter) {
+      if (this.currentLetter !== letter) {
+        this.setLetter(letter)
+      }
+    },
+
+    scrollList(pos) {
+      let y = parseInt(Math.abs(pos.y), 10)
+      let arr = this.scrollYPoint
+
+      if (y > arr[0] && y < arr[1]) {
+        this.scrollToLetter('A')
+      } else if (y >= arr[1] && y < arr[2]) {
+        this.scrollToLetter('B')
+      } else if (y >= arr[2] && y < arr[3]) {
+        this.scrollToLetter('C')
+      } else if (y >= arr[3] && y < arr[4]) {
+        this.scrollToLetter('D')
+      } else if (y >= arr[4] && y < arr[5]) {
+        this.scrollToLetter('E')
+      } else if (y >= arr[5] && y < arr[6]) {
+        this.scrollToLetter('F')
+      } else if (y >= arr[6] && y < arr[7]) {
+        this.scrollToLetter('G')
+      } else if (y >= arr[7] && y < arr[8]) {
+        this.scrollToLetter('H')
+      } else if (y >= arr[8] && y < arr[9]) {
+        this.scrollToLetter('J')
+      } else if (y >= arr[9] && y < arr[10]) {
+        this.scrollToLetter('K')
+      } else if (y >= arr[10] && y < arr[11]) {
+        this.scrollToLetter('L')
+      } else if (y >= arr[11] && y < arr[12]) {
+        this.scrollToLetter('M')
+      } else if (y >= arr[12] && y < arr[13]) {
+        this.scrollToLetter('N')
+      } else if (y >= arr[13] && y < arr[14]) {
+        this.scrollToLetter('P')
+      } else if (y >= arr[14] && y < arr[15]) {
+        this.scrollToLetter('Q')
+      } else if (y >= arr[15] && y < arr[16]) {
+        this.scrollToLetter('R')
+      } else if (y >= arr[16] && y < arr[17]) {
+        this.scrollToLetter('S')
+      } else if (y >= arr[17] && y < arr[18]) {
+        this.scrollToLetter('T')
+      } else if (y >= arr[18] && y < arr[19]) {
+        this.scrollToLetter('W')
+      } else if (y >= arr[19] && y < arr[20]) {
+        this.scrollToLetter('X')
+      } else if (y >= arr[20] && y < arr[21]) {
+        this.scrollToLetter('Y')
+      } else if (y >= arr[21]) {
+        this.scrollToLetter('Z')
+      }
     },
 
     handleLetterChange(letter) {
@@ -109,11 +166,13 @@ export default {
     selectCity(cityName) {
       console.log('当前选择城市', cityName)
       this.updateCity(cityName)
+      this.cityListScroll.scrollTo(0, 0)
       this.$router.push(`/`)
     },
 
     ...mapMutations({
-      updateCity: 'updateCity'
+      updateCity: 'updateCity',
+      setLetter: 'setLetter'
     })
   }
 }
@@ -131,6 +190,8 @@ export default {
   top 234px
   bottom 0
   z-index 5
+  height calc(100vh - 234px)
+  overflow hidden
   dl
     dt
       background-color #f5f5f5
