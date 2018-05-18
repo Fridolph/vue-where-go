@@ -65,7 +65,7 @@ export default {
           })
         }
         this.list = result
-        console.log(newVal, result)
+        // console.log(newVal, result)
       }, 100)
     }
   },
@@ -85,6 +85,7 @@ export default {
       console.log('当前选择城市', cityName)
       this.updateCity(cityName)
       this.$router.push(`/`)
+      this.keyword = ''
     },
 
     ...mapMutations({

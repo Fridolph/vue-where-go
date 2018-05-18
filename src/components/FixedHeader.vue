@@ -23,26 +23,18 @@ export default class FixedHeader extends Vue {
     opacity: 0
   }
 
-  timer: any = null
-
   handleScroll() {
-    if (this.timer) {
-      clearTimeout(this.timer)
-    } else {
-      this.timer = setTimeout(() => {
-        let top = document.documentElement.scrollTop
-        console.log(top)
+    let top = document.documentElement.scrollTop
+    // console.log(top)
 
-        if (top > 60) {
-          let opacity = top / 200
-          opacity = opacity > 1 ? 1 : opacity
-          opacity = opacity < 0.05 ? 0 : opacity
-          this.styles = {opacity}
-          this.showAbs = false
-        } else {
-          this.showAbs = true
-        }
-      }, 100)
+    if (top > 60) {
+      let opacity = top / 200
+      opacity = opacity > 1 ? 1 : opacity
+      opacity = opacity < 0.05 ? 0 : opacity
+      this.styles = {opacity}
+      this.showAbs = false
+    } else {
+      this.showAbs = true
     }
   }
 

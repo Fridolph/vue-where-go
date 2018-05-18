@@ -5,6 +5,10 @@ const Home = () => import(/* webpackChunkName: "views_home" */'@views/home/index
 const City = () => import(/* webpackChunkName: "views_city" */'@views/city/index.vue')
 const Detail = () => import(/* webpackChunkName: "views_detail" */'@views/detail/index.vue')
 
+// import Home from '../views/home'
+// import City from '../views/city'
+// import Detail from '../views/detail'
+
 Vue.use(Router)
 
 const router = new Router({
