@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// const Home = () => import(/* webpackChunkName: "views_home" */'@views/home/index.vue')
-// const City = () => import(/* webpackChunkName: "views_city" */'@views/city/index.vue')
-// const Detail = () => import(/* webpackChunkName: "views_detail" */'@views/detail/index.vue')
+const Home = () => import(/* webpackChunkName: "views_home" */'@views/home/index.vue')
+const City = () => import(/* webpackChunkName: "views_city" */'@views/city/index.vue')
+const Detail = () => import(/* webpackChunkName: "views_detail" */'@views/detail/index.vue')
 
-import Home from '../views/home'
-import City from '../views/city'
-import Detail from '../views/detail'
+// import Home from '../views/home'
+// import City from '../views/city'
+// import Detail from '../views/detail'
 
 Vue.use(Router)
 
