@@ -37,7 +37,7 @@ module.exports = {
       '@router': resolve('src/router'),
       '@layouts': resolve('src/layouts'),
       '@plugins': resolve('src/plugins'),
-      '@components': resolve('src/components'),
+      '@components': resolve('src/components')
     }
   },
   module: {
